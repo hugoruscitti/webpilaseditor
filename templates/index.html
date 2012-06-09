@@ -1,6 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Pilas engine!</h1>
-    <p>Proximamente disponible en javascript ...</p>
+<style>
+    canvas {
+        border: 1px solid gray;
+    }
+</style>
+<canvas id='canvas' width=320 height=100></canvas>
+
+
+<script>
+$(document).ready(function () {
+    var editor = ace.edit("editor");
+    editor.session.setMode("ace/mode/javascript");
+    editor.resize();
+
+    $('#ejecutar').click(function() {
+        var documento = editor.getSession().getDocument();
+        eval(documento.getValue());
+    });
+});
+</script>
+
+
+<p>
+<button id='ejecutar' class='btn btn-primary'><i class="icon-play icon-white"></i>Ejecutar</button>
+
+<style>
+  #editor {
+        background-color: white;
+        height: 100%;
+    }
+
+  #contenedor {
+      height: 300px; 
+      padding: 10px; 
+      border: solid 1px gray;
+      position:relative;
+  }
+</style>
+
+<p>
+<div id='contenedor'>
+    <div id="editor" style="position:absolute; top:0;bottom:0;left: 0;right:0">alert("hola");</div>
+</div>
+
 {% endblock %}
