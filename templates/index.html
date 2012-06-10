@@ -1,48 +1,43 @@
 {% extends 'base.html' %}
 
+{% block extra_head %}
+
+    <script src="/static/js/ace.js"></script>
+
+    <script src="http://mootools.net/download/get/mootools-core-1.4.5-full-nocompat-yc.js"></script>
+    <script src="http://code.createjs.com/easeljs-0.4.2.min.js"></script>
+    <script src="https://raw.github.com/hugoruscitti/pilasweb/master/pilas/pilas.js"></script>
+{% endblock %}
+
 {% block content %}
-<style>
-    canvas {
-        border: 1px solid gray;
-    }
-</style>
-<canvas id='canvas' width=320 height=100></canvas>
 
 
 <script>
-$(document).ready(function () {
+window.addEvent("domready", function() {
     var editor = ace.edit("editor");
     editor.session.setMode("ace/mode/javascript");
     editor.resize();
 
-    $('#ejecutar').click(function() {
+    document.id("ejecutar").addEvent("click", function() {
         var documento = editor.getSession().getDocument();
         eval(documento.getValue());
     });
 });
 </script>
 
+<canvas id='canvas' width=320 height=100></canvas>
+
 
 <p>
 <button id='ejecutar' class='btn btn-primary'><i class="icon-play icon-white"></i>Ejecutar</button>
 
-<style>
-  #editor {
-        background-color: white;
-        height: 100%;
-    }
-
-  #contenedor {
-      height: 300px; 
-      padding: 10px; 
-      border: solid 1px gray;
-      position:relative;
-  }
-</style>
-
 <p>
 <div id='contenedor'>
-    <div id="editor" style="position:absolute; top:0;bottom:0;left: 0;right:0">alert("hola");</div>
+<div id="editor">window.pilas = new Pilas();
+pilas.iniciar("canvas");
+console.log("Bienvenido!");
 </div>
+</div>
+
 
 {% endblock %}
