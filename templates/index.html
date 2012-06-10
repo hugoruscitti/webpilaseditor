@@ -25,7 +25,7 @@ window.addEvent("domready", function() {
 });
 </script>
 
-<canvas id='canvas' width=320 height=100></canvas>
+<canvas id='canvas' width=320 height=240></canvas>
 
 
 <p>
@@ -35,8 +35,8 @@ window.addEvent("domready", function() {
 <div id='contenedor'>
 <div id="editor">window.pilas = new Pilas();
 pilas.iniciar("canvas");
-console.log("Bienvenido!");
-</div>
+
+var mensaje = new pilas.actores.Texto("Hola mundo!");</div>
 </div>
 
 
