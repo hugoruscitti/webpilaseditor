@@ -1,5 +1,9 @@
 footer {
-    text-align: center;
+    padding: 1em;
+}
+
+footer .firma {
+    float: right;
 }
 
 canvas {
