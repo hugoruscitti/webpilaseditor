@@ -5,8 +5,8 @@
     <script src="/static/js/ace.js"></script>
 
     <script src="http://mootools.net/download/get/mootools-core-1.4.5-full-nocompat-yc.js"></script>
-    <script src="http://code.createjs.com/easeljs-0.4.2.min.js"></script>
-    <script src="https://raw.github.com/hugoruscitti/pilasweb/master/pilas/pilas.js"></script>
+    <script type='text/javascript' src="https://raw.github.com/hugoruscitti/pilasweb/master/dist/pilasengine.min.js"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -35,10 +35,9 @@ window.addEvent("domready", function() {
 
 <p>
 <div id='contenedor'>
-<div id="editor">window.pilas = new Pilas();
-pilas.iniciar("canvas");
-
-var mensaje = new pilas.actores.Texto("Hola mundo!");</div>
+<div id="editor">
+  console.log("asdasd");
+</div>
 </div>
 
 
