@@ -5,7 +5,11 @@
     <script src="/static/js/ace.js"></script>
 
     <script src="http://mootools.net/download/get/mootools-core-1.4.5-full-nocompat-yc.js"></script>
-    <script type='text/javascript' src="https://raw.github.com/hugoruscitti/pilasweb/master/dist/pilasengine.min.js"></script>
+    <script src="http://hugoruscitti.github.com/pilasweb/dist/pilasengine.min.js"></script>
+
+    <script>
+        window.pilasengine = require("pilas");
+    </script>
 
 {% endblock %}
 
@@ -23,7 +27,6 @@ window.addEvent("domready", function() {
         eval(documento.getValue());
     });
 
-    document.id("ejecutar").click();
 });
 </script>
 
@@ -31,12 +34,19 @@ window.addEvent("domready", function() {
 
 
 <p>
-<button id='ejecutar' class='btn btn-primary'><i class="icon-play icon-white"></i>Ejecutar</button>
+<button id='ejecutar' class='btn btn-primary'><i class="icon-play icon-white"></i>Ejecutar programa</button>
 
 <p>
 <div id='contenedor'>
 <div id="editor">
-  console.log("asdasd");
+var pilas = new pilasengine.Pilas("canvas", 'https://github.com/hugoruscitti/pilasweb/raw/master/data/');
+var actor = new pilas.actores.Actor();
+
+pilas.depurador.definir_modos({depuracion: true});
+
+var aceituna = new pilas.actores.Aceituna();
+aceituna.x = 100;
+aceituna.y = 25;
 </div>
 </div>
 
