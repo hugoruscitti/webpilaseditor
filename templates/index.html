@@ -18,13 +18,14 @@
 
 <script>
 window.addEvent("domready", function() {
-    var editor = ace.edit("editor");
-    editor.session.setMode("ace/mode/javascript");
-    editor.resize();
+    //var editor = ace.edit("editor");
+    //editor.session.setMode("ace/mode/javascript");
+    //editor.resize();
 
     document.id("ejecutar").addEvent("click", function() {
-        var documento = editor.getSession().getDocument();
-        eval(documento.getValue());
+        //var documento = document.id('editor').html();
+        var contenido = document.getElementById("editor").innerHTML
+        eval(contenido);
     });
 
 });
