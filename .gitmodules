@@ -1,3 +1,3 @@
-[submodule "pilasweb"]
-	path = pilasweb
+[submodule "static/pilasweb"]
+	path = static/pilasweb
 	url = https://github.com/hugoruscitti/pilasweb.git
