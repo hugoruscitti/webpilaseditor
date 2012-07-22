@@ -10,13 +10,8 @@
   });
 
   require(['main'], function(pilasengine){
-    var pilas = new pilasengine.Pilas("canvas", 'static/pilasweb/data/');
-
-    window.pilas = pilas;
-    pilas.depurador.definir_modos({depuracion: true});
-
-    var aceituna = new pilas.actores.Aceituna();
-    aceituna.x = 100;
+    window.pilasengine = pilasengine;
+    console.log("hola");
   });
 
 </script>
@@ -41,14 +36,18 @@
 
 <canvas id='canvas' width=320 height=240></canvas>
 
-
 <p>
-<button id='ejecutar' class='btn btn-primary'><i class="icon-play icon-white"></i>Ejecutar programa</button>
+<button id='ejecutar' class='btn btn-primary' onclick='ejecutar_codigo(); return false;'><i class="icon-play icon-white"></i>Ejecutar programa</button>
 
 <p>
 <div id='contenedor'>
-<textarea id="code" name="code">var actor = new pilas.actores.Actor();
-actor.y = 100;
+<textarea id="code" name="code">var pilas = new pilasengine.Pilas("canvas", 'static/pilasweb/data/');
+
+pilas.depurador.definir_modos({depuracion: true});
+
+var aceituna = new pilas.actores.Aceituna();
+aceituna.x = 100;
+aceituna.y = 25;
 </textarea>
 </div>
 
@@ -59,10 +58,17 @@ actor.y = 100;
     CodeMirror.simpleHint(cm, CodeMirror.javascriptHint);
   }
   
-  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+  window.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: true,
+    lineWrapping: true,
     extraKeys: {"Ctrl-N": "autocomplete"}
   });
+
+  function ejecutar_codigo() {
+    eval(window.editor.getValue());
+  }
+
+  ejecutar_codigo();
 </script>
 
 
