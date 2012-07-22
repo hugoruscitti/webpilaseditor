@@ -14,6 +14,9 @@
     console.log("hola");
   });
 
+
+  window.onload = function() {ejecutar_codigo()};
+
 </script>
 
 
@@ -55,20 +58,22 @@ aceituna.y = 25;
 
 <script>
   CodeMirror.commands.autocomplete = function(cm) {
+    console.log(cm);
     CodeMirror.simpleHint(cm, CodeMirror.javascriptHint);
   }
   
   window.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: true,
-    lineWrapping: true,
-    extraKeys: {"Ctrl-N": "autocomplete"}
+    extraKeys: {"Ctrl-N": "autocomplete"},
+    mode: 'javascript',
+    indentWithTabs: false,
+    matchBrackets: true,
   });
 
   function ejecutar_codigo() {
     eval(window.editor.getValue());
   }
 
-  ejecutar_codigo();
 </script>
 
 
