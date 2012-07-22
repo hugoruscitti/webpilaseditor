@@ -1,61 +1,43 @@
 {% extends 'base.html' %}
 
 {% block extra_head %}
-  <!-- <script src="http://mootools.net/download/get/mootools-core-1.4.5-full-nocompat-yc.js"></script> -->
-  <script src="/static/pilasweb/pilasengine/libs/require.js"></script>
+<script src="/static/pilasweb/pilasengine/libs/require.js"></script>
 
-    <script type="text/javascript">
-    require.config({
-      baseUrl: "/static/pilasweb/pilasengine",
-    });
+<script type="text/javascript">
 
-    require(['main'], function(pilasengine){
-      var pilas = new pilasengine.Pilas("canvas", 'static/pilasweb/data/');
+  require.config({
+    baseUrl: "/static/pilasweb/pilasengine",
+  });
 
-      window.pilas = pilas;
-      pilas.depurador.definir_modos({depuracion: true});
+  require(['main'], function(pilasengine){
+    var pilas = new pilasengine.Pilas("canvas", 'static/pilasweb/data/');
 
-      var aceituna = new pilas.actores.Aceituna();
-    });
-    </script>
+    window.pilas = pilas;
+    pilas.depurador.definir_modos({depuracion: true});
 
-    <!-- <script src="/static/js/ace.js"></script> -->
+    var aceituna = new pilas.actores.Aceituna();
+    aceituna.x = 100;
+  });
 
+</script>
+
+
+  <!-- Agregando codemirror -->
+  <link rel="stylesheet" href="static/CodeMirror/lib/codemirror.css">
+  <link rel="stylesheet" href="static/CodeMirror/lib/util/simple-hint.css">
+  <link rel="stylesheet" href="static/CodeMirror/doc/docs.css">
+
+  <script src="static/CodeMirror/lib/codemirror.js"></script>
+  <script src="static/CodeMirror/lib/util/simple-hint.js"></script>
+  <script src="static/CodeMirror/lib/util/javascript-hint.js"></script>
+  <script src="static/CodeMirror/mode/javascript/javascript.js"></script>
+
+  <style type="text/css">.CodeMirror {border: 1px solid #eee;} .CodeMirror-scroll { height: 100% }</style>
+
+  <!-- fin codemirror -->
 {% endblock %}
 
 {% block content %}
-
-
-<!--
-<script>
-
-      define(function (require){
-        alert(require);
-        var pilasengine = require("pilas");
-        var pilas = new pilasengine.Pilas('canvas', '../data/');
-
-        var a = new pilas.actores.Aceituna();
-
-      });
-
-window.addEvent("domready", function() {
-
-
-
-
-    //var editor = ace.edit("editor");
-    //editor.session.setMode("ace/mode/javascript");
-    //editor.resize();
-
-    document.id("ejecutar").addEvent("click", function() {
-        //var documento = document.id('editor').html();
-        var contenido = document.getElementById("editor").innerHTML
-        eval(contenido);
-    });
-
-});
-</script>
--->
 
 <canvas id='canvas' width=320 height=240></canvas>
 
@@ -65,17 +47,23 @@ window.addEvent("domready", function() {
 
 <p>
 <div id='contenedor'>
-<div id="editor">
-var pilas = new pilasengine.Pilas("canvas", 'https://github.com/hugoruscitti/pilasweb/raw/master/data/');
-var actor = new pilas.actores.Actor();
-
-pilas.depurador.definir_modos({depuracion: true});
-
-var aceituna = new pilas.actores.Aceituna();
-aceituna.x = 100;
-aceituna.y = 25;
+<textarea id="code" name="code">var actor = new pilas.actores.Actor();
+actor.y = 100;
+</textarea>
 </div>
-</div>
+
+<p>Usá <code>ctrl+n</code> para autocompletar!
+
+<script>
+  CodeMirror.commands.autocomplete = function(cm) {
+    CodeMirror.simpleHint(cm, CodeMirror.javascriptHint);
+  }
+  
+  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    extraKeys: {"Ctrl-N": "autocomplete"}
+  });
+</script>
 
 
 {% endblock %}
